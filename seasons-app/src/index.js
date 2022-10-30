@@ -12,7 +12,7 @@ class App extends React.Component {
   //   this.state = { lat: null, errorMessage: "" }; // Initializing State Object
   // }
 
-  // Better way of declaring State
+  // Better way of initializing State
   state = { lat: null, errorMessage: "" };
 
   /*   // Called automaticaly any time the component shows up on the screen
@@ -35,7 +35,8 @@ class App extends React.Component {
     );
   }
 
-  render() {
+  // helper function
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error {this.state.errorMessage}</div>;
     }
@@ -45,6 +46,10 @@ class App extends React.Component {
     }
 
     return <Spinner message="Please accept location request" />;
+  }
+
+  render() {
+    return <div className="border red">{this.renderContent()}</div>;
   }
 }
 
