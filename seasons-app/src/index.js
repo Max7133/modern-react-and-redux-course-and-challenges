@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SeasonDisplay from "./SeasonDisplay";
 
 // Reason for extending, is that it will allow to get many of built in functionality from this React.Component Class in to App Class
 class App extends React.Component {
-  constructor(props) {
-    super(props); // Reference to parent's constructor function (for all the setup code inside of React.Component Constructor still gets called)
+  // constructor(props) {
+  //   super(props); // Reference to parent's constructor function (for all the setup code inside of React.Component Constructor still gets called)
 
-    // THIS IS THE ONLY TIME that I do direct assignment to this.state
-    this.state = { lat: null, errorMessage: "" }; // Initializing State Object
-  }
+  //   // THIS IS THE ONLY TIME that I do direct assignment to this.state
+  //   this.state = { lat: null, errorMessage: "" }; // Initializing State Object
+  // }
+
+  // Better way of declaring State
+  state = { lat: null, errorMessage: "" };
 
   /*   // Called automaticaly any time the component shows up on the screen
   componentDidMount() {
@@ -36,7 +40,7 @@ class App extends React.Component {
     }
 
     if (!this.state.errorMessage && this.state.lat) {
-      return <div>Latitute: {this.state.lat}</div>;
+      return <SeasonDisplay lat={this.state.lat} />;
     }
 
     return <div>Loading!</div>;
