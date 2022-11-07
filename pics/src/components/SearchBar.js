@@ -14,10 +14,20 @@ class SearchBar extends React.Component {
   // After initializing the State it has a single Property 'term' that starts off as an Empty String
   // And then every single time a User types inside that Input, the State is going to be updated ('term' Property)
 
+  onFormSubmit = (e) => {
+    e.preventDefault();
+
+    //console.log(this.state.term)
+    // when In Class Based Component, need to reference the Props Object with This Keyword before Props
+    this.props.onSubmitOnChangeWhateverNameCanChangeOnlyInMyCustomComponentsLikeSearchBar(
+      this.state.term
+    );
+  };
+
   render() {
     return (
       <div className="ui segment">
-        <form className="ui form">
+        <form onSubmit={this.onFormSubmit} className="ui form">
           <div className="field">
             <label>Image Search</label>
             <input
