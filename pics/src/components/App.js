@@ -1,11 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import axios from "axios";
 import SearchBar from "../components/SearchBar";
 
 class App extends React.Component {
   // Callback Function
   onSearchSubmit(term) {
-    console.log(term);
+    //console.log(term);
+    // GET Request with Axios (1st arg: Address, 2nd arg: Object with options)
+    // Params specifies different Query string parameters that I want to add into this request.
+    axios.get("https://api.unsplash.com/search/photos", {
+      params: { query: term },
+      headers: {
+        Authorization: "Client-ID MY_KEY",
+      },
+    });
   }
   render() {
     return (
