@@ -1,20 +1,27 @@
 import React from "react";
-import axios from "axios";
 import SearchBar from "../components/SearchBar";
+import unsplash from "../api/unsplash.js";
+import ImageList from "./ImageList";
 
 class App extends React.Component {
+  // Init State with default value of Empty Array
+  state = { images: [] };
+
   // Callback Function
-  onSearchSubmit(term) {
+  onSearchSubmit = async (term) => {
     //console.log(term);
     // GET Request with Axios (1st arg: Address, 2nd arg: Object with options)
     // Params specifies different Query string parameters that I want to add into this request.
-    axios.get("https://api.unsplash.com/search/photos", {
+    const response = await unsplash.get("search/photos", {
       params: { query: term },
-      headers: {
-        Authorization: "Client-ID MY_KEY",
-      },
     });
-  }
+    // FIRST METHOD of getting the response from async request
+    //.then((response) => console.log(response.data.results));
+
+    // Updating State
+    this.setState({ images: response.data.results });
+  };
+
   render() {
     return (
       <div className="ui container" style={{ marginTop: "10px" }}>
@@ -23,6 +30,7 @@ class App extends React.Component {
             this.onSearchSubmit
           }
         />
+        <ImageList images={this.state.images} />
       </div>
     );
   }
