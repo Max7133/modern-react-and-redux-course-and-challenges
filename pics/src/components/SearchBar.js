@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class SearchBar extends React.Component {
   // when typing something to the Input, this Callback is going to be invoked (with 1 arg being passed to it automatically)
@@ -10,11 +10,11 @@ class SearchBar extends React.Component {
 
   // Initializing State
   // State is an Object that has a single Property 'term' (empty String by default)
-  state = { term: "" };
+  state = { term: '' };
   // After initializing the State it has a single Property 'term' that starts off as an Empty String
   // And then every single time a User types inside that Input, the State is going to be updated ('term' Property)
 
-  onFormSubmit = (e) => {
+  onFormSubmit = e => {
     e.preventDefault();
 
     //console.log(this.state.term)
@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
             <input
               type="text"
               value={this.state.term} // the Value Prop is going to overwrite whatever text is already inside of the Input
-              onChange={(e) => this.setState({ term: e.target.value })}
+              onChange={e => this.setState({ term: e.target.value })}
             />
           </div>
         </form>

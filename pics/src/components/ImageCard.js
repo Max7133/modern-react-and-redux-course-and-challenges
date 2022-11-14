@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // Component that checks the IMG how large it is, and sets the grid-row-end: INDIVIDUALLY
 class ImageCard extends React.Component {
@@ -16,7 +16,7 @@ class ImageCard extends React.Component {
     // Gives a direct reference to the img Tag and then Ill add an Event Listener to it. (like in JS)
     // Any time that a image successfully loads up or downloads an Image from the Internet and displays it on the screen, it emits this (load) Event
     // Once it emits this load event, that means now it has successfully downloaded the Image, its being displayed on the screen, and now I can get the height of the Image
-    this.imageRef.current.addEventListener("load", this.setSpans);
+    this.imageRef.current.addEventListener('load', this.setSpans);
   }
 
   // calling setSpans here is because the Property that I'm gone set inside it is called the (grid-row-end Property) and it took units of spans.
