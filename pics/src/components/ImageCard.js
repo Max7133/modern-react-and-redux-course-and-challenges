@@ -5,6 +5,8 @@ class ImageCard extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { spans: 0 };
+
     // Calling React.createRef() and assign it to the Instance Variable so that I can refer back to later on inside this Class
     this.imageRef = React.createRef(); // for accessing a single element in the DOM, in this case an IMG
   }
@@ -20,7 +22,14 @@ class ImageCard extends React.Component {
   // calling setSpans here is because the Property that I'm gone set inside it is called the (grid-row-end Property) and it took units of spans.
   // Arrow function because of the This Keyword
   setSpans = () => {
-    console.log(this.imageRef.current.clientHeight);
+    const height = this.imageRef.current.clientHeight;
+
+    //Gets the Number of spans that the Image requires
+    // height / grip-auto-rows height with 10px
+    const spans = Math.ceil(height / 10 + 1); // + 1 for if there will be a portion of a row that the Image needs, it's going to be rounded up or go to the next highest row.
+
+    //this.setState({ spans: spans });
+    this.setState({ spans: spans });
   };
 
   render() {
@@ -29,7 +38,7 @@ class ImageCard extends React.Component {
 
     // ref is a JS Object that has a 'current' Property and it references a DOM NODE in this case is a img
     return (
-      <div>
+      <div style={{ gridRowEnd: `span ${this.state.spans}` }}>
         <img ref={this.imageRef} alt={description} src={urls.regular} />
       </div>
     );
