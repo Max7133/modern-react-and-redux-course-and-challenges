@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="ui container">
         <SearchBar />
       </div>
     );
@@ -12,3 +12,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// ui container will remove fullscreen width of the input field
