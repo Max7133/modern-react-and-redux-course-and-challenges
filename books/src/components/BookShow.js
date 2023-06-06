@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BookEdit from './BookEdit';
 
-function BookShow({ book, onDelete }) {
+function BookShow({ book, onDelete, onEdit }) {
   const [showEdit, setShowEdit] = useState(false); // I don't want to showEdit by default
 
   const handleDeleteClick = () => {
@@ -16,7 +16,7 @@ function BookShow({ book, onDelete }) {
   let content = <h3>{book.title}</h3>;
   // If showEdit is true
   if (showEdit) {
-    content = <BookEdit book={book} />; // Display BookEdit component with "book" Prop, intead of "book.title"
+    content = <BookEdit onEdit={onEdit} book={book} />; // Display BookEdit component with "book" Prop, intead of "book.title"
   }
 
   return (

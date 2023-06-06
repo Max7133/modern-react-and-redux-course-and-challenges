@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function BookEdit({ book }) {
+function BookEdit({ book, onEdit }) {
   const [title, setTitle] = useState(book.title); // default Value
 
   // This will be called whenever a user changes the text inputs
@@ -10,6 +10,9 @@ function BookEdit({ book }) {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    // getting the Id and Title from "book" Prop
+    onEdit(book.id, title);
   };
 
   return (
