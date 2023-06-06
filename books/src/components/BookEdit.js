@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function BookEdit({ book }) {
-  const [title, setTitle] = useState(book.title); // default Value - empty string
+  const [title, setTitle] = useState(book.title); // default Value
 
   // This will be called whenever a user changes the text inputs
   const handleChange = e => {
