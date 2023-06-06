@@ -5,6 +5,16 @@ import BookList from './components/BookList';
 function App() {
   const [books, setBooks] = useState([]);
 
+  // it will go throgh Array of books, and find the id I want to delete
+  const deleteBookById = id => {
+    // filter() - gives new Array
+    const updatedBooks = books.filter(book => {
+      return book.id !== id;
+    });
+
+    setBooks(updatedBooks);
+  };
+
   // receives whatever title of a book user has entered
   const createBook = title => {
     const updatedBooks = [
@@ -16,7 +26,7 @@ function App() {
 
   return (
     <div className="app">
-      <BookList books={books} />
+      <BookList books={books} onDelete={deleteBookById} />
       <BookCreate onCreate={createBook} />
     </div>
   );
