@@ -21,10 +21,15 @@ function App() {
     fetchBooks();
   }, []);
 
-  const editBookById = (id, newTitle) => {
+  const editBookById = async (id, newTitle) => {
+    const response = await axios.put(`http://localhost:3001/books/${id}`, {
+      title: newTitle, // the body of the request "title" Property, which I receice from this Function as an Argument "newTitle"
+    });
+
     const updatedBooks = books.map(book => {
       if (book.id === id) {
-        return { ...book, title: newTitle }; // takes all the existing Properties from the "book" & puts the new title in
+        // takes all the different Properties out of the "book" Object from the API response, take all the different Key Value Pairs, and add them into this new Object { ...book, ...response.data };
+        return { ...book, ...response.data };
       }
       return book; // otherwise return book
     });
@@ -32,7 +37,9 @@ function App() {
   };
 
   // it will go throgh Array of books, and find the id I want to delete
-  const deleteBookById = id => {
+  const deleteBookById = async id => {
+    await axios.delete(`http://localhost:3001/books/${id}`);
+
     // filter() - gives new Array
     const updatedBooks = books.filter(book => {
       return book.id !== id;
