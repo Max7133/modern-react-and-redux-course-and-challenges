@@ -1,10 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 
 function App() {
   const [books, setBooks] = useState([]);
+
+  // makes a network request and gets a list of books
+  const fetchBooks = async () => {
+    const response = await axios.get('http://localhost:3001/books');
+
+    setBooks(response.data);
+  };
+
+  // useEffect() is called 1 time when the component is first rendered
+  // second argument [], is for follow up renders if needed
+  // [] - the Arrow Function inside useEffect will never be called again
+  // [counter] - the Arrow Function inside useEffect will be called again if the "counter" value changes
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   const editBookById = (id, newTitle) => {
     const updatedBooks = books.map(book => {
