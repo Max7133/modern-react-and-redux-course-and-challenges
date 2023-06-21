@@ -1,10 +1,10 @@
-import { useState, useContext } from 'react';
-import BooksContext from '../context/books';
+import { useState } from 'react';
+import useBooksContext from '../hooks/use-books-context';
 
 function BookEdit({ book, onSubmit }) {
   const [title, setTitle] = useState(book.title); // default Value
   // Reaching out to the Context Object "BooksContext" to pull out "editBookById"
-  const { editBookById } = useContext(BooksContext);
+  const { editBookById } = useBooksContext();
 
   // This will be called whenever a user changes the text inputs
   const handleChange = e => {
