@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 
-function BookCreate({ onCreate }) {
+function BookCreate({ createBook }) {
   const [title, setTitle] = useState('');
 
+  // Reaching out to the Context Object "BooksContext" to pull out "createBook"
+  const { createBook } = useContext(BooksContext);
   // keeps track when user changes the input
   const handleChange = e => {
     setTitle(e.target.value);
   };
   const handleSubmit = e => {
     e.preventDefault();
-    onCreate(title);
+    createBook(title);
     setTitle(''); // clear form once it is submitted
   };
 

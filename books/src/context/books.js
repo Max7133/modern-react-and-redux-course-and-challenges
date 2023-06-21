@@ -51,8 +51,20 @@ function Provider({ children }) {
     setBooks(updatedBooks);
   };
 
+  const valueToShare = {
+    // if the Key is identical to the Value then (books: books === books)
+    books,
+    fetchBooks,
+    editBookById,
+    deleteBookById,
+    createBook,
+  };
   // value - Prop
-  return <BooksContext.Provider value={{}}>{children}</BooksContext.Provider>;
+  return (
+    <BooksContext.Provider value={valueToShare}>
+      {children}
+    </BooksContext.Provider>
+  );
 }
 
 export { Provider };
