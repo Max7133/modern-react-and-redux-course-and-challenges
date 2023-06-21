@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import BookEdit from './BookEdit';
+import BooksContext from '../context/books';
 
-function BookShow({ book, onDelete, onEdit }) {
+function BookShow({ book }) {
   const [showEdit, setShowEdit] = useState(false); // I don't want to showEdit by default
+  // Reaching out to the Context Object "BooksContext" to pull out "deleteBookById"
+  const { deleteBookById } = useContext(BooksContext);
 
   const handleDeleteClick = () => {
-    onDelete(book.id);
+    deleteBookById(book.id);
   };
 
   const handleEditClick = () => {
@@ -13,10 +16,8 @@ function BookShow({ book, onDelete, onEdit }) {
   };
 
   // Updates the State of "setShowEdit" and set it to FALSE
-  // When I pass down handleSubmit it ends up inside BookEdit, eventually it gets called and then it goes up into handleSubmit, so I then can pass it to "onEdit"
-  const handleSubmit = (id, newTitle) => {
+  const handleSubmit = () => {
     setShowEdit(false);
-    onEdit(id, newTitle);
   };
 
   // Depending on the Value of showEdit, it will assign a Variable either "book.title" or an instance of the bookEdit component

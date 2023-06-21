@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 
 function BookEdit({ book, onSubmit }) {
   const [title, setTitle] = useState(book.title); // default Value
+  // Reaching out to the Context Object "BooksContext" to pull out "editBookById"
+  const { editBookById } = useContext(BooksContext);
 
   // This will be called whenever a user changes the text inputs
   const handleChange = e => {
@@ -11,7 +14,9 @@ function BookEdit({ book, onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit(book.id, title); // it will run handleSubmit
+    // Closes the form
+    onSubmit(); // it will run handleSubmit
+    editBookById(book.id, title);
   };
 
   return (
