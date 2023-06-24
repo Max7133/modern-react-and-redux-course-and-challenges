@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useCallback } from 'react';
 import axios from 'axios';
 
 const BooksContext = createContext();
@@ -8,11 +8,12 @@ function Provider({ children }) {
   const [books, setBooks] = useState([]);
 
   // makes a network request and gets a list of books
-  const fetchBooks = async () => {
+  // useCallback will tell React that the "fetchBooks" function doesn't change after rerenders, thus useEffect won't run it again
+  const fetchBooks = useCallback(async () => {
     const response = await axios.get('http://localhost:3001/books');
 
     setBooks(response.data);
-  };
+  }, []);
 
   const editBookById = async (id, newTitle) => {
     const response = await axios.put(`http://localhost:3001/books/${id}`, {

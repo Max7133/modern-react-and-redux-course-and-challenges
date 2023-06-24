@@ -13,7 +13,7 @@ function App() {
   // [counter] - the Arrow Function inside useEffect will be called again if the "counter" value changes
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [fetchBooks]); // fetchBooks won't be called again after the first render because of useCallback()
 
   return (
     <div className="app">
