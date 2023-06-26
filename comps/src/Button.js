@@ -19,12 +19,24 @@ function Button({
   outline,
   rounded,
 }) {
+  // 'px-3 py-1.5 border' (1st Argument) - will be included no matter what
+  const classes = className('px-3 py-1.5 border', {
+    'border-blue-500 bg-blue-500 text-white': primary,
+    'border-gray-900 bg-gray-900 text-white': secondary,
+    'border-green-500 bg-green-500 text-white': success,
+    'border-yellow-400 bg-yellow-400 text-white': warning,
+    'border-red-500 bg-red-500 text-white': danger,
+    'rounded-full': rounded, // rounded button - true (will be rounded if true)
+    'bg-white': outline, // if 'outline' is true, backround will be 'white' + text color is the same as outline
+    'text-blue-500': outline && primary, // the later declaration will overwrite the previos one
+    'text-gray-900': outline && secondary, // if outline && secondary is true
+    'text-green-500': outline && success,
+    'text-yellow-400': outline && warning,
+    'text-red-500': outline && danger,
+  });
+
   // Underlying/Wrapped Element -> <button>Button</button>
-  return (
-    <button className="px-3 py-1.5 border border-blue-600 bg-blue-500 text-white">
-      {children}
-    </button>
-  );
+  return <button className={classes}>{children}</button>;
 }
 
 // Assigning an Object in which it's Keys are going to be the Names of Different Props (for Validation)

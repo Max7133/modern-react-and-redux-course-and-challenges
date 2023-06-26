@@ -4,7 +4,8 @@ function App() {
   return (
     <div>
       <div>
-        <Button success rounded outline>
+        {/* secondary outline rounded etc.. all Prop names */}
+        <Button secondary outline rounded>
           Button 1
         </Button>
       </div>
@@ -22,7 +23,7 @@ function App() {
         </Button>
       </div>
       <div>
-        <Button secondary rounded>
+        <Button primary rounded>
           Button 5
         </Button>
       </div>
