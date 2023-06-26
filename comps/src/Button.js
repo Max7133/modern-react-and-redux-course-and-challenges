@@ -1,4 +1,13 @@
-import PropTypes from 'prop-types';
+import className from 'classnames';
+
+/* // In JS, Keys cannot have dashes or special symbols inside of them unless wrapped the Key with a quotes like 'bg-blue-500'
+// 'px-1.5' will always be included, because I passed it as the 1st Argument
+const finalClassName = className('px-1.5', {
+  'bg-blue-500': true,
+  'text-yellow-500': false,
+}); // The Key is going to be included ONLY if tha Value is Truthy
+
+console.log(finalClassName); // px-1.5 bg-blue-500 */
 
 function Button({
   children,
@@ -11,7 +20,11 @@ function Button({
   rounded,
 }) {
   // Underlying/Wrapped Element -> <button>Button</button>
-  return <button>{children}</button>;
+  return (
+    <button className="px-3 py-1.5 border border-blue-600 bg-blue-500 text-white">
+      {children}
+    </button>
+  );
 }
 
 // Assigning an Object in which it's Keys are going to be the Names of Different Props (for Validation)
