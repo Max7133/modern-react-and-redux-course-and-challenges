@@ -2,11 +2,20 @@ import { GoBell, GoDatabase, GoClock } from 'react-icons/go';
 import Button from './Button';
 
 function App() {
+  const handleClick = () => {
+    console.log('click');
+  };
   return (
     <div>
       <div>
         {/* secondary outline rounded etc.. all Prop names */}
-        <Button secondary outline rounded>
+        <Button
+          secondary
+          outline
+          rounded
+          className="mb-5"
+          onClick={handleClick}
+        >
           <GoBell />
           Button 1
         </Button>
