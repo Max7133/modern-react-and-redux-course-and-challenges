@@ -1,3 +1,4 @@
+import { GoBell, GoDatabase, GoClock } from 'react-icons/go';
 import Button from './Button';
 
 function App() {
@@ -6,16 +7,21 @@ function App() {
       <div>
         {/* secondary outline rounded etc.. all Prop names */}
         <Button secondary outline rounded>
+          <GoBell />
           Button 1
         </Button>
       </div>
       <div>
         <Button danger outline>
+          <GoDatabase />
           Button 2
         </Button>
       </div>
       <div>
-        <Button warning>Button 3</Button>
+        <Button warning>
+          <GoClock />
+          Button 3
+        </Button>
       </div>
       <div>
         <Button secondary outline>
