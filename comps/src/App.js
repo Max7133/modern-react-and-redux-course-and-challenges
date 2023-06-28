@@ -1,49 +1,25 @@
-import { GoBell, GoDatabase, GoClock } from 'react-icons/go';
-import Button from './Button';
+import Accordion from './components/Accordion';
 
 function App() {
-  const handleClick = () => {
-    console.log('click');
-  };
-  return (
-    <div>
-      <div>
-        {/* secondary outline rounded etc.. all Prop names */}
-        <Button
-          secondary
-          outline
-          rounded
-          className="mb-5"
-          onClick={handleClick}
-        >
-          <GoBell />
-          Button 1
-        </Button>
-      </div>
-      <div>
-        <Button danger outline>
-          <GoDatabase />
-          Button 2
-        </Button>
-      </div>
-      <div>
-        <Button warning>
-          <GoClock />
-          Button 3
-        </Button>
-      </div>
-      <div>
-        <Button secondary outline>
-          Button 4
-        </Button>
-      </div>
-      <div>
-        <Button primary rounded>
-          Button 5
-        </Button>
-      </div>
-    </div>
-  );
+  // Example Items Array Prop (Array of Object where each Object has a Label and some Content)
+  const items = [
+    {
+      id: 'dsfv',
+      label: 'Temporary label text 1',
+      content: 'Temporary content text which should be longer than label',
+    },
+    {
+      id: 'sdfg',
+      label: 'Temporary label text 2',
+      content: 'Temporary content text which should be longer than label',
+    },
+    {
+      id: 'vdbd',
+      label: 'Temporary label text 3',
+      content: 'Temporary content text which should be longer than label',
+    },
+  ];
+  return <Accordion items={items} />;
 }
 
 export default App;
