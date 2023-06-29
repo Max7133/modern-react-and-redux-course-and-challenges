@@ -11,7 +11,8 @@ function Accordion({ items }) {
 
     return (
       <div key={item.id}>
-        <div>{item.label}</div>
+        {/* whenever the user clicks on one of the 'indexes', the Arrow Function will run and will invoke setExpanded with that particular item (only one Element will be expanded at a time*/}
+        <div onClick={() => setExpandedIndex(index)}>{item.label}</div>
         {isExpanded && <div>{item.content}</div>}
       </div>
     );
