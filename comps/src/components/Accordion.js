@@ -3,6 +3,10 @@ import { useState } from 'react';
 function Accordion({ items }) {
   const [expandedIndex, setExpandedIndex] = useState(0); // the item at index 0 will be expanded by default, when the Component is first rendered
 
+  const handleClick = nextIndex => {
+    setExpandedIndex(nextIndex);
+  };
+
   const renderedItems = items.map((item, index) => {
     const isExpanded = index === expandedIndex;
 
@@ -12,7 +16,7 @@ function Accordion({ items }) {
     return (
       <div key={item.id}>
         {/* whenever the user clicks on one of the 'indexes', the Arrow Function will run and will invoke setExpanded with that particular item (only one Element will be expanded at a time*/}
-        <div onClick={() => setExpandedIndex(index)}>{item.label}</div>
+        <div onClick={() => handleClick(index)}>{item.label}</div>
         {isExpanded && <div>{item.content}</div>}
       </div>
     );
