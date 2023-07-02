@@ -1,25 +1,22 @@
-import Accordion from './components/Accordion';
+import Dropdown from './components/Dropdown';
 
 function App() {
-  // Example Items Array Prop (Array of Object where each Object has a Label and some Content)
-  const items = [
+  const options = [
     {
-      id: 'dsfv',
-      label: 'Temporary label text 1',
-      content: 'Temporary content text which should be longer than label',
+      label: 'Red',
+      value: 'red',
     },
     {
-      id: 'sdfg',
-      label: 'Temporary label text 2',
-      content: 'Temporary content text which should be longer than label',
+      label: 'Green',
+      value: 'green',
     },
     {
-      id: 'vdbd',
-      label: 'Temporary label text 3',
-      content: 'Temporary content text which should be longer than label',
+      label: 'Blue',
+      value: 'blue',
     },
   ];
-  return <Accordion items={items} />;
+
+  return <Dropdown options={options} />;
 }
 
 export default App;
