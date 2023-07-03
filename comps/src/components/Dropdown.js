@@ -25,16 +25,17 @@ function Dropdown({ options, selection, onSelect }) {
     );
   });
 
-  // by default show select
+  /*   // by default show select
   let content = 'Select...';
   // if passed down selection, then update it to the label
   if (selection) {
     content = selection.label;
-  }
+  } */
 
   return (
     <div>
-      <div onClick={handleClick}>{content}</div>
+      {/* if 'selection' is Nullm then it's going to meant that it's Undefined which is Falsy, therefore it's going to show 'Select...' which is Truthy */}
+      <div onClick={handleClick}>{selection?.label || 'Select...'}</div>
       {/* if isOpen is true, it going to get back the <div>{renderedOptions}</div>, if false, nothing will be displayed */}
       {isOpen && <div>{renderedOptions}</div>}
     </div>
