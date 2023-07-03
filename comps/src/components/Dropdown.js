@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // options Prop - Array of different 'options' Objects (each will have 'label' & 'value')
-function Dropdown({ options, selection, onSelect }) {
+function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -12,7 +12,7 @@ function Dropdown({ options, selection, onSelect }) {
   const handleOptionClick = option => {
     setIsOpen(false);
     // Selects the option that was clicked
-    onSelect(option);
+    onChange(option);
   };
 
   // creatates a list of Elements
@@ -34,8 +34,8 @@ function Dropdown({ options, selection, onSelect }) {
 
   return (
     <div>
-      {/* if 'selection' is Nullm then it's going to meant that it's Undefined which is Falsy, therefore it's going to show 'Select...' which is Truthy */}
-      <div onClick={handleClick}>{selection?.label || 'Select...'}</div>
+      {/* if 'selection' is Null then it's going to mean that it's Undefined which is Falsy, therefore it's going to show 'Select...' which is Truthy */}
+      <div onClick={handleClick}>{value?.label || 'Select...'}</div>
       {/* if isOpen is true, it going to get back the <div>{renderedOptions}</div>, if false, nothing will be displayed */}
       {isOpen && <div>{renderedOptions}</div>}
     </div>
