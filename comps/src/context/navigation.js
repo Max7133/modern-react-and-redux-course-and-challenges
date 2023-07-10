@@ -23,10 +23,15 @@ function NavigationProvider({ children }) {
     };
   }, []); // I only want to run this Arrow Function 1 time, that's why I put []
 
+  // "to" - path that it will navigate to, e.g. to === '/accordion/'
+  const navigate = to => {
+    window.history.pushState({}, '', to);
+    setCurrentPath(to);
+  };
+
   // whatever is in the 'value' I share with the rest of the App
   return (
-    <NavigationContext.Provider value={{}}>
-      {currentPath}
+    <NavigationContext.Provider value={{ currentPath, navigate }}>
       {children}
     </NavigationContext.Provider>
   );
