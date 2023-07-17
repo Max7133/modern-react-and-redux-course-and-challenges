@@ -6,6 +6,7 @@ function Sidebar() {
     { label: 'Dropdown', path: '/' },
     { label: 'Accordion', path: '/accordion' },
     { label: 'Buttons', path: '/buttons' },
+    { label: 'Modal', path: '/modal' },
   ];
 
   // for every Object I receive, it will receive a link
