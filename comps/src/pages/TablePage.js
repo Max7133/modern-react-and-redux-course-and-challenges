@@ -23,9 +23,14 @@ function TablePage() {
     },
   ];
 
+  // keyFunc - generates a key to use for each individual row inside the Table
+  const keyFunc = fruit => {
+    return fruit.name;
+  };
+
   return (
     <div>
-      <Table data={data} config={config} />
+      <Table data={data} config={config} keyFunc={keyFunc} />
     </div>
   );
 }
