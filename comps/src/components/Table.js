@@ -1,9 +1,12 @@
+import { Fragment } from 'react';
+// Fragment - is like a very simple, custom component for, assigning things like a Key Prop, Group, Different Child Elements together, without having to make my own Custom Component
+
 function Table({ data, config, keyFunc }) {
   // maping ovver the 'config' array of Objects and then receives each of those Object as a variable called 'column'
   const renderedHeaders = config.map(column => {
     // if 'column' has a defined 'header' Property, it's going to call the header(), and get back the <th></th>, and going to use that <th</th> to represent the RED header for this 'column'
     if (column.header) {
-      return column.header();
+      return <Fragment key={column.label}>{column.header()}</Fragment>;
     }
     return <th key={column.label}>{column.label}</th>;
   });
