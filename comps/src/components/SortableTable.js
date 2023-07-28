@@ -45,7 +45,7 @@ function SortableTable(props) {
   // if not null
   if (sortOrder && sortBy) {
     // for every 'column' Object find a 'column' Obj with a 'label' === sortBy piece of state
-    const { sortValue } = config.find(column => (column.label = sortBy));
+    const { sortValue } = config.find(column => column.label === sortBy);
     // once it finds sortValue func from 'config' Obj, then do the sorting
     // [...data] is going to make a New Array of 'data' and copy all the Elements from original 'data' into to it
     // sortedData - is the sorted version of the 'data' Array
