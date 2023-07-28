@@ -9,6 +9,13 @@ function SortableTable(props) {
 
   // is going to be called with a label of the 'column' that the user just clicked on
   const handleClick = label => {
+    // if user is sorting by 1 'column' and 'label is NOT === to sortBy
+    if (sortBy && label !== sortBy) {
+      setSortOrder('asc');
+      setSortBy(label); // will set to then new 'label' the use just clicked on
+      return; // return early so it won't go through other checks bellow
+    }
+
     if (sortOrder === null) {
       setSortOrder('asc');
       setSortBy(label);
@@ -70,12 +77,7 @@ function SortableTable(props) {
     });
   }
   // ...props - already has that 'config' property, but because I'm listing out the 'config' Prop later on inside this Element, the 'config' Prop that is present inside of Props will be overwritten.
-  return (
-    <div>
-      {sortOrder} - {sortBy}
-      <Table {...props} data={sortedData} config={updatedConfig} />
-    </div>
-  );
+  return <Table {...props} data={sortedData} config={updatedConfig} />;
 }
 
 function getIcons(label, sortBy, sortOrder) {
