@@ -1,3 +1,4 @@
+import produce from 'immer'; // 'produce' - function that I will pass to the 'reducer', and then that's going to give me back a new Func that will allow to make Direct State Changes
 import { useReducer } from 'react';
 import Button from '../components/Button';
 import Panel from '../components/Panel';
@@ -31,31 +32,51 @@ const reducer = (state, action) => {
   // Whatever gets returned will be the new State!
   switch (action.type) {
     case INCREMENT_COUNT:
-      return {
-        ...state,
-        count: state.count + 1,
-      };
+      // return {
+      //   ...state,
+      //   count: state.count + 1,
+      // };
+
+      //// Immer library version
+      state.count = state.count + 1;
+      return;
     case DECREMENT_COUNT:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
+      // return {
+      //   ...state,
+      //   count: state.count - 1,
+      // };
+
+      //// Immer library version
+      state.count = state.count - 1;
+      return;
     case ADD_VALUE_TO_COUNT:
-      return {
-        ...state,
-        count: state.count + state.valueToAdd,
-        valueToAdd: 0,
-      };
+      // return {
+      //   ...state,
+      //   count: state.count + state.valueToAdd,
+      //   valueToAdd: 0,
+      // };
+
+      //// Immer library version
+      state.count = state.count + state.valueToAdd;
+      state.valueToAdd = 0;
+      return;
     case CHANGE_VALUE_TO_ADD:
-      return {
-        ...state,
-        valueToAdd: action.payload,
-      };
+      // return {
+      //   ...state,
+      //   valueToAdd: action.payload,
+      // };
+
+      //// Immer library version
+      state.valueToAdd = action.payload;
+      return;
     default:
       // 1st option
       // throw new Error('unexpected action type: ' + action.type);
       // 2nd option
-      return state; // returnes whatever the current 'state' and ignores whatever 'action' Object was just dispatched
+      // return state; // returnes whatever the current 'state' and ignores whatever 'action' Object was just dispatched
+
+      //// Immer library versions
+      return;
   }
 };
 
@@ -67,7 +88,7 @@ function CounterPage({ initialCount }) {
   // useReducer version
   // 1st Arg reducer, 2nd Arg - an Object with a count of initialCount and valueToAdd of 0
   // to change State, I need to call 'dispatch'
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(produce(reducer), {
     count: initialCount,
     valueToAdd: 0,
   });
