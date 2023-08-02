@@ -1,4 +1,4 @@
-import produce from 'immer'; // 'produce' - function that I will pass to the 'reducer', and then that's going to give me back a new Func that will allow to make Direct State Changes
+import { produce } from 'immer'; // 'produce' - function that I will pass to the 'reducer', and then that's going to give me back a new Func that will allow to make Direct State Changes
 import { useReducer } from 'react';
 import Button from '../components/Button';
 import Panel from '../components/Panel';
