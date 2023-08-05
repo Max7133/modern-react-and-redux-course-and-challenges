@@ -1,4 +1,5 @@
 import className from 'classnames';
+import { twMerge } from 'tailwind-merge';
 
 /* // In JS, Keys cannot have dashes or special symbols inside of them unless wrapped the Key with a quotes like 'bg-blue-500'
 // 'px-1.5' will always be included, because I passed it as the 1st Argument
@@ -21,23 +22,25 @@ function Button({
   ...rest // will take all the remaining Properties that are being passed down from the Parent Component and assign them to 'rest'
 }) {
   // 'px-3 py-1.5 border' (1st Argument) - will be included no matter what
-  const classes = className(
-    rest.className, // receives whatever the className Property coming in off thet 'rest' Object, and use it as a part of the overall Class declaration
-    'flex items-center px-3 py-1.5 border',
-    {
-      'border-blue-500 bg-blue-500 text-white': primary,
-      'border-gray-900 bg-gray-900 text-white': secondary,
-      'border-green-500 bg-green-500 text-white': success,
-      'border-yellow-400 bg-yellow-400 text-white': warning,
-      'border-red-500 bg-red-500 text-white': danger,
-      'rounded-full': rounded, // rounded button - true (will be rounded if true)
-      'bg-white': outline, // if 'outline' is true, backround will be 'white' + text color is the same as outline
-      'text-blue-500': outline && primary, // the later declaration will overwrite the previos one
-      'text-gray-900': outline && secondary, // if outline && secondary is true
-      'text-green-500': outline && success,
-      'text-yellow-400': outline && warning,
-      'text-red-500': outline && danger,
-    }
+  const classes = twMerge(
+    className(
+      rest.className, // receives whatever the className Property coming in off thet 'rest' Object, and use it as a part of the overall Class declaration
+      'flex items-center px-3 py-1.5 border',
+      {
+        'border-blue-500 bg-blue-500 text-white': primary,
+        'border-gray-900 bg-gray-900 text-white': secondary,
+        'border-green-500 bg-green-500 text-white': success,
+        'border-yellow-400 bg-yellow-400 text-white': warning,
+        'border-red-500 bg-red-500 text-white': danger,
+        'rounded-full': rounded, // rounded button - true (will be rounded if true)
+        'bg-white': outline, // if 'outline' is true, backround will be 'white' + text color is the same as outline
+        'text-blue-500': outline && primary, // the later declaration will overwrite the previos one
+        'text-gray-900': outline && secondary, // if outline && secondary is true
+        'text-green-500': outline && success,
+        'text-yellow-400': outline && warning,
+        'text-red-500': outline && danger,
+      }
+    )
   );
 
   // Underlying/Wrapped Element -> <button>Button</button>
