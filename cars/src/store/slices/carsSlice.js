@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@redux/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const carsSlice = createSlice({
   name: 'cars',
