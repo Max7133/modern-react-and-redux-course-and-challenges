@@ -1,17 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName } from '../store';
+import { changeName, changeCost } from '../store';
 
 function CarForm() {
   const dispatch = useDispatch();
   // useSelector - hook for accessing the State
   // passing over a Selector Function that receives the Big State Object
   // and whatever I return from the Selector Function is what I'm going to get access to inside of my Component
-  const name = useSelector(state => {
-    return state.form.name; // for now, just I get access for the name piece of state
+  //const name = useSelector(state => {
+  const { name, cost } = useSelector(state => {
+    //return state.form.name; // for now, just I get access for the name piece of state
+    return {
+      name: state.form.name,
+      cost: state.form.cost, // now I need to return the 'cost' as well
+    };
   });
+
   const handleNameChange = event => {
     // every reducer func expects to receive a Payload
     dispatch(changeName(event.target.value)); // 'event.target.value' is going to be the Payload in formSlice
+  };
+
+  const handleCostChange = event => {
+    const carCost = parseInt(event.target.value) || 0; // cost is always a number and NOT a NaN
+    dispatch(changeCost(carCost));
   };
 
   return (
@@ -29,6 +40,16 @@ function CarForm() {
               className="input is-expanded"
               value={name}
               onChange={handleNameChange}
+            />
+          </div>
+
+          <div className="field">
+            <label className="label">Cost</label>
+            <input
+              className="input is-expanded"
+              value={cost || ''} // for not showing 0 when empty
+              onChange={handleCostChange}
+              type="number"
             />
           </div>
         </div>
