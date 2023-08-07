@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName, changeCost } from '../store';
+import { changeName, changeCost, addCar } from '../store';
 
 function CarForm() {
   const dispatch = useDispatch();
@@ -19,16 +19,22 @@ function CarForm() {
     // every reducer func expects to receive a Payload
     dispatch(changeName(event.target.value)); // 'event.target.value' is going to be the Payload in formSlice
   };
-
   const handleCostChange = event => {
     const carCost = parseInt(event.target.value) || 0; // cost is always a number and NOT a NaN
     dispatch(changeCost(carCost));
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    // Will add a new car to the list of cars
+    // when calling this Action Creator, I need a Payload Property that is an Object
+    //dispatch(addCar({ name: name, cost: cost }));
+    dispatch(addCar({ name, cost }));
   };
 
   return (
     <div className="car-form panel">
       <h4 className="subtitle is-3">Add car</h4>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="field-group">
           <div className="field">
             <label className="label">Name</label>
@@ -52,6 +58,9 @@ function CarForm() {
               type="number"
             />
           </div>
+        </div>
+        <div className="field">
+          <button className="button is-link">Submit</button>
         </div>
       </form>
     </div>
