@@ -7,6 +7,7 @@ const carsSlice = createSlice({
     carsData: [], // will grow over time
   },
   reducers: {
+    // whenever a user changes the text input, dispatch an action
     changeSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
