@@ -4,9 +4,19 @@ import { removeCar } from '../store';
 function CarList() {
   // Access to the Dispatch Function
   const dispatch = useDispatch();
+
+  //const cars = useSelector(state => {
   // getting access to the list of cars from Redux Store and print them out
-  const cars = useSelector(state => {
-    return state.cars.carsData;
+  // in addition, Derived State (state that can be calculated from using the existing state) is best to put logic in useSelector()
+  // using destructuring so I can use only the State that I care about
+  // FILTERED LIST
+  const cars = useSelector(({ cars: { carsData, searchTerm } }) => {
+    //return state.cars.carsData;
+    // return 'true' for keeping the car and return it inside the new Array
+    // if the 'car' has a 'name', that includes the searchTerm,
+    return carsData.filter(car =>
+      car.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
 
   // updating the State means dispatch the Action Object
