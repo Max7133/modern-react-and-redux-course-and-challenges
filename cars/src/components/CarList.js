@@ -1,12 +1,18 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeCar } from '../store';
 
 function CarList() {
+  // Access to the Dispatch Function
+  const dispatch = useDispatch();
   // getting access to the list of cars from Redux Store and print them out
   const cars = useSelector(state => {
     return state.cars.carsData;
   });
 
-  const handleCarDelete = car => {};
+  // updating the State means dispatch the Action Object
+  const handleCarDelete = car => {
+    dispatch(removeCar(car.id)); // this Action Creator needs to have a Payload of 'id'
+  };
 
   // for every car, return a div element
   const renderedCars = cars.map(car => {
