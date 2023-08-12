@@ -4,6 +4,8 @@ const usersSlice = createSlice({
   name: 'users',
   initialState: {
     data: [],
+    isLoading: false, // default value
+    error: null, // default value
   },
   reducers: {}, // usersSlice is not going to make use of this 'reducers' Property at all
 });
