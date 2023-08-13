@@ -9,8 +9,19 @@ const fetchUsers = createAsyncThunk('users/fetch', async () => {
   // fetching, and returning the data that I want to use inside of usersSlice
   const response = await axios.get('http://localhost:3005/users');
 
+  // DEV ONLY !!!
+  await pause(1000);
+
   // whatever I return here - is going to be automatically assigned to the Payload Property of the 'fulfilled' Action Type, PAYLOAD [{ id:1, name: 'Myra' }]
   return response.data; // I want to use this data in the Reducer for updating State
 });
+
+// IN DEV ONLY (Helper Function) !!!
+// for adding in an arbitrary small PAUSE after I make the request to the server
+const pause = duration => {
+  return new Promise(resolve => {
+    setTimeout(resolve, duration);
+  });
+};
 
 export { fetchUsers };
