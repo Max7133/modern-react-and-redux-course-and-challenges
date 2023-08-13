@@ -18,7 +18,9 @@ function UsersList() {
   }, [dispatch]); // usually just [] is fine, used [dispatch] so the ESLint error will go away
 
   if (isLoading) {
-    return <Skeleton times={6} />; // show 6 gray boxes
+    // h-10 - a Height of 10 rem
+    // w-full - expand in the X direction as much as possible
+    return <Skeleton times={6} className="h-10 w-full" />; // show 6 gray boxes
   }
 
   if (error) {
