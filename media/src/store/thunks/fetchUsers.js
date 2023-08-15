@@ -10,7 +10,7 @@ const fetchUsers = createAsyncThunk('users/fetch', async () => {
   const response = await axios.get('http://localhost:3005/users');
 
   // DEV ONLY !!!
-  await pause(10000);
+  await pause(1000);
 
   // whatever I return here - is going to be automatically assigned to the Payload Property of the 'fulfilled' Action Type, PAYLOAD [{ id:1, name: 'Myra' }]
   return response.data; // I want to use this data in the Reducer for updating State

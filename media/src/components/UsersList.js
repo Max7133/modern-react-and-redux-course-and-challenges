@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from '../store';
+import { fetchUsers, addUser } from '../store';
+import Button from './Button';
 import Skeleton from './Skeleton';
 
 function UsersList() {
@@ -16,6 +17,11 @@ function UsersList() {
     // Running Thunk
     dispatch(fetchUsers());
   }, [dispatch]); // usually just [] is fine, used [dispatch] so the ESLint error will go away
+
+  const handleUserAdd = () => {
+    // Running Thunk
+    dispatch(addUser()); // adds ran gen user to the user list (data: []) from 'usersSlice'
+  };
 
   if (isLoading) {
     // h-10 - a Height of 10 rem
@@ -38,7 +44,15 @@ function UsersList() {
     );
   });
 
-  return <div>{renderedUsers}</div>; // how many Users exist inside of the 'data' Array
+  return (
+    <div>
+      <div className="flex flex-row justify-between m-3">
+        <h1 className="m-2 text-xl">Users</h1>
+        <Button onClick={handleUserAdd}>+ Add User</Button>
+      </div>
+      {renderedUsers}
+    </div>
+  ); // how many Users exist inside of the 'data' Array
 }
 
 export default UsersList;

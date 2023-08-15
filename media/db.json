@@ -1,5 +1,26 @@
 {
-  "users": [{ "id": 1, "name": "Myra" }],
+  "users": [
+    {
+      "id": 1,
+      "name": "Myra"
+    },
+    {
+      "name": "Hubert Dare",
+      "id": 2
+    },
+    {
+      "name": "Bradley Lebsack",
+      "id": 3
+    },
+    {
+      "name": "Israel Von",
+      "id": 4
+    },
+    {
+      "name": "Seth MacGyver",
+      "id": 5
+    }
+  ],
   "albums": [],
   "photos": []
 }

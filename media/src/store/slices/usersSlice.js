@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchUsers } from '../thunks/fetchUsers';
+import { addUser } from '../thunks/addUser';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -11,6 +12,7 @@ const usersSlice = createSlice({
   //reducers: {}, // usersSlice is not going to make use of this 'reducers' Property at all
   // extraReducers - allows to watch for some very particular, additional Action Types, to watch for actions being dispatched that are not inherently tied to this Slice
   extraReducers(builder) {
+    ////// fetchUsers
     // I want it to watch for 3 particular Action Types, that are 'pending', 'fulfilled', 'rejected'
     builder.addCase(fetchUsers.pending, (state, action) => {
       // 2 Arg - Reducer Function - what gets executed any time it sees an Action with these particular Action Types
@@ -24,6 +26,18 @@ const usersSlice = createSlice({
     builder.addCase(fetchUsers.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error; // automatically created Error Object, adding this instead of error: null
+    });
+    ////// addUser
+    builder.addCase(addUser.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data.push(action.payload); // adding random generated user from 'addUser' to the 'data' []
+    });
+    builder.addCase(addUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
     });
   },
 });
