@@ -8,6 +8,8 @@ function UsersList() {
   // whether or not it's loading the big list of users (for showing and not showing the skeleton loader Comp)
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [loadingUsersError, setLoadingUsersError] = useState(null);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [creatingUserError, setCreatingUserError] = useState(null);
   const dispatch = useDispatch();
   // useSelector - Accessing State inside of a Component
   // state - Big State Object
@@ -34,8 +36,13 @@ function UsersList() {
   }, [dispatch]); // usually just [] is fine, used [dispatch] so the ESLint error will go away
 
   const handleUserAdd = () => {
+    setIsCreatingUser(true);
     // Running Thunk
-    dispatch(addUser()); // adds ran gen user to the user list (data: []) from 'usersSlice'
+    // adds ran gen user to the user list (data: []) from 'usersSlice'
+    dispatch(addUser())
+      .unwrap()
+      .catch(err => setCreatingUserError(err))
+      .finally(() => setIsCreatingUser(false));
   };
 
   if (isLoadingUsers) {
@@ -64,7 +71,12 @@ function UsersList() {
     <div>
       <div className="flex flex-row justify-between m-3">
         <h1 className="m-2 text-xl">Users</h1>
-        <Button onClick={handleUserAdd}>+ Add User</Button>
+        {isCreatingUser ? (
+          'Creating User...'
+        ) : (
+          <Button onClick={handleUserAdd}>+ Add User</Button>
+        )}
+        {creatingUserError && 'Error creating user...'}
       </div>
       {renderedUsers}
     </div>
