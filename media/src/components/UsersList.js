@@ -29,38 +29,38 @@ function UsersList() {
     doCreateUser();
   };
 
+  // TEMPORARY - will have a separate component for this later
+  // the 'content' variable is going to be what is showing in the <body></body> of the page, and the 'header' is always going to be visible
+  let content;
   if (isLoadingUsers) {
     // h-10 - a Height of 10 rem
     // w-full - expand in the X direction as much as possible
-    return <Skeleton times={6} className="h-10 w-full" />; // show 6 gray boxes
-  }
-
-  // if is not null
-  if (loadingUsersError) {
-    return <div>Error fetching data...</div>;
-  }
-
-  // TEMPORARY - will have a separate component for this later
-  const renderedUsers = data.map(user => {
-    return (
-      <div key={user.id} className="mb-2 border rounded">
-        <div className="flex p-2 justify-between items-center cursor-pointer">
-          {user.name}
+    content = <Skeleton times={6} className="h-10 w-full" />; // show 6 gray boxes
+  } else if (loadingUsersError) {
+    content = <div>Error fetching data...</div>;
+    // if not loading users and their is no error, assign the user list
+  } else {
+    content = data.map(user => {
+      return (
+        <div key={user.id} className="mb-2 border rounded">
+          <div className="flex p-2 justify-between items-center cursor-pointer">
+            {user.name}
+          </div>
         </div>
-      </div>
-    );
-  });
+      );
+    });
+  }
 
   return (
     <div>
-      <div className="flex flex-row justify-between m-3">
+      <div className="flex flex-row justify-between items-center m-3">
         <h1 className="m-2 text-xl">Users</h1>
         <Button loading={isCreatingUser} onClick={handleUserAdd}>
           + Add User
         </Button>
         {creatingUserError && 'Error creating user...'}
       </div>
-      {renderedUsers}
+      {content}
     </div>
   ); // how many Users exist inside of the 'data' Array
 }
