@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { fetchUsers, addUser } from '../store';
 import Button from './Button';
 import Skeleton from './Skeleton';
+import { useThunk } from '../hooks/use-thunk';
 
 function UsersList() {
   // whether or not it's loading the big list of users (for showing and not showing the skeleton loader Comp)
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-  const [loadingUsersError, setLoadingUsersError] = useState(null);
-  const [isCreatingUser, setIsCreatingUser] = useState(false);
-  const [creatingUserError, setCreatingUserError] = useState(null);
-  const dispatch = useDispatch();
+  //const [doFetchUsers, isLoadingUsers] = useState(false);
+  //const [loadingUsersError, setLoadingUsersError] = useState(null);
+  const [doFetchUsers, isLoadingUsers, loadingUsersError] =
+    useThunk(fetchUsers);
+  const [doCreateUser, isCreatingUser, creatingUserError] = useThunk(addUser);
   // useSelector - Accessing State inside of a Component
   // state - Big State Object
   const { data } = useSelector(state => {
@@ -19,30 +20,13 @@ function UsersList() {
 
   // will run automatically when the 1st time the Component is rendered onto the screen
   useEffect(() => {
-    setIsLoadingUsers(true); // updates State
-    // Running Thunk
-    // starts the request
-    // unwrap() - is going to give a brand new Promise back, and the Promise it gives back is going to follow the CONVENTIONAL RULES
-    // dispatch RULES - .then() is called when the request is FULFILLED or REJECTED
-    // CONVENTIONAL RULES - .then() ONLY if the request is FULFILLED and .catch() ONLY if the request REJECTED
-    dispatch(fetchUsers())
-      .unwrap()
-      //.then(() => setIsLoadingUsers(false)) // I DON'T NEED IT BECAUSE OF finally(), it will run no mater what at the end
-      .catch(
-        err => setLoadingUsersError(err)
-        //setIsLoadingUsers(false);
-      )
-      .finally(() => setIsLoadingUsers(false));
-  }, [dispatch]); // usually just [] is fine, used [dispatch] so the ESLint error will go away
+    doFetchUsers();
+  }, [doFetchUsers]); // usually just [] is fine, used [doFetchUsers] so the ESLint error will go away
 
   const handleUserAdd = () => {
-    setIsCreatingUser(true);
     // Running Thunk
     // adds ran gen user to the user list (data: []) from 'usersSlice'
-    dispatch(addUser())
-      .unwrap()
-      .catch(err => setCreatingUserError(err))
-      .finally(() => setIsCreatingUser(false));
+    doCreateUser();
   };
 
   if (isLoadingUsers) {
