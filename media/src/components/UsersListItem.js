@@ -3,6 +3,7 @@ import Button from './Button';
 import { removeUser } from '../store';
 import { useThunk } from '../hooks/use-thunk';
 import ExpandablePanel from './ExpandablePanel';
+import AlbumsList from './AlbumsList';
 
 // the Arg receives a Prop of the 'user' Object from UsersList comp
 function UsersListItem({ user }) {
@@ -24,7 +25,12 @@ function UsersListItem({ user }) {
     </>
   );
 
-  return <ExpandablePanel header={header}>CONTENT!!!</ExpandablePanel>;
+  return (
+    <ExpandablePanel header={header}>
+      {/* I have received a Prop of 'user' in UsersListItem, so I'm passing this Prop here directly */}
+      <AlbumsList user={user} />
+    </ExpandablePanel>
+  );
 }
 
 export default UsersListItem;
