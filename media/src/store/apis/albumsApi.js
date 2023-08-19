@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { faker } from '@faker-js/faker';
 
 // when this R.T.Q. API is created, it's going to automatically create a Slice (I don't need to interact with it in any way), Thunks, Action Creators behind the scenes and set of Auto Gen Hooks
 // the Slice is used to store a ton of State related to all the different requests that are being issued, the data they fetch, the status of those requests, errors and so on
@@ -20,6 +21,22 @@ const albumsApi = createApi({
   endpoints(builder) {
     // configuration Object (detailing different kidns of requests I want to make)
     return {
+      // 2nd endpoint
+      addAlbum: builder.mutation({
+        // for changing data, still needs a 'query' function (query, more like tell R.T.Q. about some Parameters to use for the request)
+        // (user) Arg - when making the request, it needs to know what (user) I want to tie this album to
+        query: user => {
+          return {
+            url: './albums',
+            method: 'POST',
+            body: {
+              userId: user.id,
+              title: faker.commerce.productName(), // random gen name
+            },
+          };
+        },
+      }),
+      // 1st endpoint
       fetchAlbums: builder.query({
         // property (Exactly how it needs to make a request - goal of 'query')
         query: user => {
@@ -41,5 +58,5 @@ const albumsApi = createApi({
 });
 
 // Exporting generated Hook for fetching the list of albums
-export const { useFetchAlbumsQuery } = albumsApi;
+export const { useFetchAlbumsQuery, useAddAlbumMutation } = albumsApi;
 export { albumsApi }; // exporting the 'albumsApi' itself
