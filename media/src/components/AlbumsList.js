@@ -2,7 +2,7 @@ import { useFetchAlbumsQuery, useAddAlbumMutation } from '../store';
 import Skeleton from './Skeleton';
 import ExpandablePanel from './ExpandablePanel';
 import Button from './Button';
-import { albumsApi } from '../store/apis/albumsApi';
+import AlbumsListItem from './AlbumsListItem';
 
 // whenever this Comp is 1st rendered on the screen, it will fetch all the different albums tied to this particular user
 function AlbumsList({ user }) {
@@ -34,14 +34,7 @@ function AlbumsList({ user }) {
     content = <div>Error loading albums.</div>;
   } else {
     content = data.map(album => {
-      const header = <div>{album.title}</div>;
-
-      return (
-        // ExpandablePabel needs a 'header' Prop
-        <ExpandablePanel key={album.id} header={header}>
-          List of photos in the album
-        </ExpandablePanel>
-      );
+      return <AlbumsListItem key={album.id} album={album} />;
     });
   }
 
