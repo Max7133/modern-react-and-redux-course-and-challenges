@@ -57,6 +57,26 @@
       "userId": 1,
       "title": "Electronic Granite Cheese",
       "id": 17
+    },
+    {
+      "userId": 4,
+      "title": "Generic Cotton Fish",
+      "id": 18
+    },
+    {
+      "userId": 4,
+      "title": "Luxurious Soft Computer",
+      "id": 19
+    },
+    {
+      "userId": 4,
+      "title": "Recycled Wooden Pizza",
+      "id": 20
+    },
+    {
+      "userId": 9,
+      "title": "Licensed Granite Shirt",
+      "id": 21
     }
   ],
   "photos": []

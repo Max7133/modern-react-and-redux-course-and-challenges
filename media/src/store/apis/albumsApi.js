@@ -1,6 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { faker } from '@faker-js/faker';
 
+// IN DEV ONLY (Helper Function) !!!
+// for adding in an arbitrary small PAUSE after I make the request to the server and show the loading spinner on the + Add Album button
+const pause = duration => {
+  return new Promise(resolve => {
+    setTimeout(resolve, duration);
+  });
+};
+
 // when this R.T.Q. API is created, it's going to automatically create a Slice (I don't need to interact with it in any way), Thunks, Action Creators behind the scenes and set of Auto Gen Hooks
 // the Slice is used to store a ton of State related to all the different requests that are being issued, the data they fetch, the status of those requests, errors and so on
 // all this State needs to be stored somewhere inside of the Redux Store and I use this 'reducerPath' to specify that
@@ -16,6 +24,12 @@ const albumsApi = createApi({
   reducerPath: 'albums', // can be any name
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3005',
+    // fetch function - that is build directly into the browser to make request (rarely needed to use and overwrite)
+    fetchFn: async (...args) => {
+      // IN DEV ONLY
+      await pause(1000);
+      return fetch(...args);
+    },
   }),
   // function that's going to be called automatically with the 'builder' Argument
   endpoints(builder) {
