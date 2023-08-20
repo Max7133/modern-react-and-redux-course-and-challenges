@@ -23,6 +23,11 @@ const albumsApi = createApi({
     return {
       // 2nd endpoint
       addAlbum: builder.mutation({
+        // 3rd Arg is whatever I pass into the Mutation, const handleAddAlbum = () => { addAlbum(user); }; - in AlbumsList.js
+        invalidatesTags: (result, error, user) => {
+          // when this Mutation runs, it's going to find all the Queries that have a Tag of { type: 'Album', id: user.id }, marks them out of date, and those Queries are going to be executed again
+          return [{ type: 'Album', id: user.id }];
+        },
         // for changing data, still needs a 'query' function (query, more like tell R.T.Q. about some Parameters to use for the request)
         // (user) Arg - when making the request, it needs to know what (user) I want to tie this album to
         query: user => {
@@ -38,6 +43,14 @@ const albumsApi = createApi({
       }),
       // 1st endpoint
       fetchAlbums: builder.query({
+        // TAG SYSTEM
+        // 3 default Arg, result - that object, error, user (usually it's called 'arg'), conceptually for me it's the 'user' record
+        // so the 3rd Arg is going to be whatver I have passed to my Hook, when I called it back inside of the Components
+        // { id:1, name: 'Myra' } - that's the 'arg' (argument) - for me the 'user' record, so whatever I pass there, it's going to show up as the 3rd Arg in the 'providesTags'
+        // result, error I'm going to receive, but I don't need them in THIS Project
+        providesTags: (result, error, user) => {
+          return [{ type: 'Album', id: user.id }];
+        },
         // property (Exactly how it needs to make a request - goal of 'query')
         query: user => {
           // user Obj from JSON server with id: and name:

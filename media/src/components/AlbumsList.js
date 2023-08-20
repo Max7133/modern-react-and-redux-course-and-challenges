@@ -22,6 +22,7 @@ function AlbumsList({ user }) {
   //// MUTATIONS - give you a function to run when you want to change some data
 
   const handleAddAlbum = () => {
+    // whatever I'm passing here in 'addAlbum(...)', that will show up as the 3rd Arg in the 'invalidatesTags' addAlbum endpoint in 'albumsApi'
     addAlbum(user); // passing the 'user' that I want to tie the album to
   };
 
