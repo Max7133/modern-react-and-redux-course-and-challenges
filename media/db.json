@@ -19,39 +19,9 @@
   ],
   "albums": [
     {
-      "userId": 1,
-      "title": "Recycled Steel Keyboard",
-      "id": 11
-    },
-    {
-      "userId": 1,
-      "title": "Intelligent Cotton Ball",
-      "id": 12
-    },
-    {
-      "userId": 1,
-      "title": "Handcrafted Cotton Car",
-      "id": 13
-    },
-    {
       "userId": 4,
       "title": "Refined Wooden Gloves",
       "id": 14
-    },
-    {
-      "userId": 1,
-      "title": "Rustic Granite Soap",
-      "id": 15
-    },
-    {
-      "userId": 1,
-      "title": "Recycled Rubber Ball",
-      "id": 16
-    },
-    {
-      "userId": 1,
-      "title": "Electronic Granite Cheese",
-      "id": 17
     },
     {
       "userId": 4,
@@ -72,6 +42,11 @@
       "userId": 9,
       "title": "Licensed Granite Shirt",
       "id": 21
+    },
+    {
+      "userId": 1,
+      "title": "Recycled Plastic Gloves",
+      "id": 22
     }
   ],
   "photos": []

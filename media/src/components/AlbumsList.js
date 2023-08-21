@@ -15,7 +15,7 @@ function AlbumsList({ user }) {
   // refetch - function tell the Query to re-run
   // (user) - agrument to pass the 'query' function in the 'albumsApi' (line 25)
   // I had to pass in a (user) because I had to specify exactly which 'users albums' I'm looking for
-  const { data, error, isLoading } = useFetchAlbumsQuery(user); // I don't have to put it inside useEffect() or inside the Click Event Handler
+  const { data, error, isFetching } = useFetchAlbumsQuery(user); // I don't have to put it inside useEffect() or inside the Click Event Handler
   const [addAlbum, results] = useAddAlbumMutation(); // results is similiar to the upper 'results' Object that I have destructured, it contains (isError, isLoading, isSuccess, isUninitialized)
   //// QUERIES - run immediately when the component is displayed on the screen (by default)
   // whenever the QUERY HOOK is called, it's going to get back the 'results' Object (that I have destructured in to data, error, isLoading) along with the actual data that was fetched
@@ -27,7 +27,7 @@ function AlbumsList({ user }) {
   };
 
   let content;
-  if (isLoading) {
+  if (isFetching) {
     // className="h-10 w-full" times={3} for showing the skeleton boxes loader when expanding the user and it fetches the albums
     content = <Skeleton className="h-10 w-full" times={3} />; // whenever I show 'Skeleton' I need to pass in the 'times' Prop (how many Skeleton boxes it needs to show)
   } else if (error) {
