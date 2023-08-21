@@ -19,11 +19,6 @@
   ],
   "albums": [
     {
-      "id": 10,
-      "title": "Hiking Trip",
-      "userId": 1
-    },
-    {
       "userId": 1,
       "title": "Recycled Steel Keyboard",
       "id": 11

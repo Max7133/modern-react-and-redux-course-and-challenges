@@ -35,6 +35,15 @@ const albumsApi = createApi({
   endpoints(builder) {
     // configuration Object (detailing different kidns of requests I want to make)
     return {
+      // 3rd endpoint
+      removeAlbum: builder.mutation({
+        // run this mutation with the 'album' object I want to dele
+        query: album => {
+          // album Object have IDs and titles assigned to them
+          // using that ID specifically when I'm putting together the URL for this request
+          return { url: `albums/${album.id}`, method: 'DELETE' };
+        },
+      }),
       // 2nd endpoint
       addAlbum: builder.mutation({
         // 3rd Arg is whatever I pass into the Mutation, const handleAddAlbum = () => { addAlbum(user); }; - in AlbumsList.js
@@ -85,5 +94,9 @@ const albumsApi = createApi({
 });
 
 // Exporting generated Hook for fetching the list of albums
-export const { useFetchAlbumsQuery, useAddAlbumMutation } = albumsApi;
+export const {
+  useFetchAlbumsQuery,
+  useAddAlbumMutation,
+  useRemoveAlbumMutation,
+} = albumsApi;
 export { albumsApi }; // exporting the 'albumsApi' itself
