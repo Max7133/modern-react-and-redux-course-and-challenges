@@ -13,6 +13,17 @@ const photosApi = createApi({
     return {
       // each of these 3 Objects, has a 'query' function, for customizing the Request that R.T.Q. is going to make automatically
       fetchPhotos: builder.query({
+        // 3rd Arg is 'arg' but usually it is whatever I had provided to my 'query' hook, and that's the 'album'
+        providesTags: (result, error, album) => {
+          // building the list of Tags by mapping over the 'result'
+          const tags = result.map(photo => {
+            // For every single 'photo' I will return an Object with a type of 'Photo' and an ID of the 'photo.id'
+            return { type: 'Photo', id: photo.id };
+          });
+          // adding to the very end of that Array 1 more Object
+          tags.push({ type: 'AlbumPhoto', id: album.id }); // id: Albums Id
+          return tags;
+        },
         // ASSUMPTION: I assume that when I run this 'query', I'm going to provide an 'album' Object to it (the 'album' that I want to fetch the photos for.)
         // when I provide the query, that 'album' Object, it's going to show up as the 1st Arg inside the 'query' function
         query: album => {
@@ -27,6 +38,10 @@ const photosApi = createApi({
         },
       }),
       addPhoto: builder.mutation({
+        invalidatesTags: (result, error, album) => {
+          // whenever it adds a photo, it will return something like { type: 'AlbumPhoto', id: 10 }
+          return [{ type: 'AlbumPhoto', id: album.id }];
+        },
         // I need to know WHICH 'album' I'm creating the photo for
         // ASSUMPTION: I assume when I run this 'mutation', I will provide a 'album' Object, and then I can reference the 'album.Id' there
         query: album => {
@@ -42,6 +57,10 @@ const photosApi = createApi({
         },
       }),
       removePhoto: builder.mutation({
+        // 3rd Arg is 'photo' in this case (line 65), because the Value that is flowing into the endpoint is going to be the 'photo' Object
+        invalidatesTags: (result, error, photo) => {
+          return [{ type: 'Photo', id: photo.id }];
+        },
         // ASSUMPTION: I assume when I run this 'mutation', I will provide a 'photo' Object - some photo I want to DELETE.
         query: photo => {
           return {
