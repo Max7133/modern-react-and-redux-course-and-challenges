@@ -2,6 +2,7 @@ import { GoTrash } from 'react-icons/go';
 import { useRemoveAlbumMutation } from '../store';
 import Button from './Button';
 import ExpandablePanel from './ExpandablePanel';
+import PhotosList from './PhotosList';
 
 function AlbumsListItem({ album }) {
   // results Object - status of mutation
@@ -30,7 +31,7 @@ function AlbumsListItem({ album }) {
   return (
     // ExpandablePabel needs a 'header' Prop
     <ExpandablePanel key={album.id} header={header}>
-      List of photos in the album
+      <PhotosList album={album} />
     </ExpandablePanel>
   );
 }
