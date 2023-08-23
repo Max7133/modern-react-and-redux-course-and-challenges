@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'; // needs to end with /react, so 'createApi' will create Custom Hooks
 import { faker } from '@faker-js/faker';
 
 // IN DEV ONLY (Helper Function) !!!
